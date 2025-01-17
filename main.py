@@ -18,7 +18,8 @@ CORS(app)
 try:
     uri = "mongodb+srv://thuccua2004:VB39hefIin7Riwx8@cluster0.28nrq.mongodb.net/"
     client = MongoClient(uri)
-    db = client["JackWallet"]['datas']
+    db_wallet = client["JackWallet"]['datas']
+    db_product = client["JackWallet"]['products']
     print("Kết nối MongoDB thành công!")
 except Exception as e:
     print(f"Kết nối MongoDB thất bại: {e}")
@@ -27,10 +28,11 @@ def AddDataDB(address_wallet):
         user_data = {
             "address_wallet": address_wallet,
         }
-        db.insert_one(user_data)
+        db_wallet.insert_one(user_data)
         print("✅ Dữ liệu đã được thêm vào MongoDB!")
     except Exception as e:
         print(f"Lỗi khi thêm dữ liệu vào MongoDB: {e}")
+
 
 def generate_key_pair(private_key):
     if isinstance(private_key, str):
